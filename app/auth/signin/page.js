@@ -1,11 +1,12 @@
 import { FaGoogle } from "react-icons/fa";
 import Link from "next/link";
-import { signIn } from "@/auth";
+import { auth, signIn } from "@/auth";
 
-export default function signin () {
 
+export default async function signin () {
+  const session = await auth();
+  console.log(session);
     return(
-
 <main className="min-h-[520px] flex justify-center bg-gray-50 py-8 px-2">
     <article>
         <div className="w-full md:w-[30em] rounded-md bg-white p-4">

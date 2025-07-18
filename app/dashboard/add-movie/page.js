@@ -1,17 +1,25 @@
     "use client"
 
+import { db } from "@/conig/firebase.config";
 import { Button, Card, CardContent, CardHeader, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { addDoc, collection } from "firebase/firestore";
 import { useFormik } from "formik";
+import { useSession } from "next-auth/react";
 import * as yup from "yup";
+
+
 
 const schema =yup.object().shape({
   title: yup.string().required("movie title is required").min(5),
   posterUrl:yup.string().url("Please Enter a vid URL "),
-  status:yup.string().oneOf(["to-watch","watched"]).required("status is required"),
+  status:yup.string().oneOf(["Towatch","watched"]).required("status is required"),
   Comment:yup.string().required().min(10)
 })
 
-export default function MovieList (){
+export default function AddMovie ({userId}){
+   const{data : session}= useSession();
+   console.log(session)
+  const userIdentifier = userId||(session?.user?.id)
 
     const {handleSubmit,handleChange,handleBlur,touched,values,errors} = useFormik({
         initialValues: {
@@ -20,8 +28,22 @@ export default function MovieList (){
             status:"",
             comment:""
         },
-       onSubmit: ()=>{
-        console.log(`title: ${values.title}, comment:${values.comment}, status:${values.status} , posterUrl:${values.posterUrl}`)
+       onSubmit: async ()=>{
+              await addDoc(collection(db,"movies"), {
+               user:userIdentifier,
+               title:values.title,
+               posterUrl:values.posterUrl,
+               status:values.status,
+               comment:values.comment,
+               timecreated:new Date().getTime(),
+
+        }).then(()=>{
+          alert("you have added a movie")
+
+        }).catch(e =>{
+          console.log(e)
+          alert("you encountered an error,couldnt be uploaded")
+        });
        },
        validationSchema:schema
     })
@@ -33,7 +55,6 @@ export default function MovieList (){
         <CardHeader  title="Add Movie"/>
         <CardContent>
          <form onSubmit={handleSubmit}
-         
          className="flex flex-col gap-4">
           <div>
           <TextField
@@ -73,7 +94,7 @@ export default function MovieList (){
             onBlur={handleBlur}
             >
                   {touched.status && errors.status? <span className="text-red-600">{errors.status}</span> : null}
-            <MenuItem value="to-watch">To-watch</MenuItem>
+            <MenuItem value="Towatch">To watch</MenuItem>
             <MenuItem value="watched">watched</MenuItem>
             </Select>
             
@@ -87,7 +108,7 @@ export default function MovieList (){
             rows={3}
             label="comment"
             id="comment"
-            value={values.Comment}
+            value={values.comment}
             onChange={handleChange}
             placeholder="Enter comments about movie"
             
