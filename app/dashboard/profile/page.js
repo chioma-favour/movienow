@@ -1,6 +1,10 @@
 import Image from "next/image"
 import { Button } from "@mui/material"
-export default function profile (){
+import { auth } from "@/auth"
+
+
+export default async function profile (){
+  const session = await auth()
 
     return(
 
@@ -11,14 +15,14 @@ export default function profile (){
       <Image
       width={80}
       height={80}
-      src="/image.png"
+      src={session?.user?.image}
       alt="proflie"
       className="w-[80px] h-[80px] rounded-full"
       />
     </div>
-    <p className="text-center py-3 border-b border-gray-600">UserName</p>
-     <p className="text-center py-3 border-b border-gray-600">User Email</p>
-     <p className="text-center py-3 border-b border-gray-600">User ID</p>
+    <p className="text-center py-3 border-b border-gray-600">{session?.user?.name}</p>
+     <p className="text-center py-3 border-b border-gray-600">{session?.user?.email}</p>
+     <p className="text-center py-3 border-b border-gray-600">{session?.user?.id}</p>
      
 
      <form>

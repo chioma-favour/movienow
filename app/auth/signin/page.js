@@ -14,12 +14,15 @@ export default async function signin () {
     <p>signin Using....</p>
         
          <form action={async()=>{
-                "use server"
-              await signIn("google")
+                 "use server"
+                 await signIn("google")
+
          }}
-                  
+        
          className="mb-2">
-          <button className="w-full h-3[3.2em] bg-black border-b-2 border-red-500 rounded-md flex justify-center items-center gap-2">
+                  
+        
+          <button className="w-full h-[3.2em] bg-black border-b-2 border-red-500 rounded-md flex justify-center items-center gap-2">
             <FaGoogle className="text-3xl text-white" />
             <span className="text-white text-lg">Google Account</span>
           </button>
@@ -35,9 +38,8 @@ export default async function signin () {
          
          
          
-           </div>
-    </article>  
-          
+   </div>
+    </article>     
  </main>
-    )
+ )
 }
