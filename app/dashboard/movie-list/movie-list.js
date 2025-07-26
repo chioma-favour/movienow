@@ -35,7 +35,7 @@ React.useEffect (()=>{
       })
      })
      setMovies(compileMovies)
-     console.log(compileMovies)
+     
 
     
      } catch(error) {

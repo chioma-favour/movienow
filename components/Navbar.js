@@ -32,9 +32,9 @@ export default function Navbar () {
 {menuOpen && (
 <div className="px-5 pb-1 md:hidden"> 
     <ul>
-        <li>Movielist</li>
-        <li>Add-movie</li>
-        <li>proflie</li>
+         <Link href= "/dashboard/movie-list"><li>Movielist</li></Link>
+           <Link href="/dashboard/add-movie"><li>AddMovies</li></Link>
+            <Link href="/dashboard/profile"><li>Profile</li></Link>
     </ul>
     <p className="mt-2 w-[60px] h-[25px] bg-red-400 rounded-md ">login</p>
 </div>

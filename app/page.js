@@ -24,7 +24,7 @@ export default function Landing () {
  className="w-[1200px] rounded-sm"
  />
  <div className=" mt-4 px-6">
-    <h1 className="text-2xl font-bold text-white text-center">Grab your pop-corn every bite is am auction</h1>
+    <h1 className="text-2xl font-bold text-white text-center">Grab your pop-corn every bite is an auction</h1>
  </div>
  </div>
 
