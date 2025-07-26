@@ -11,7 +11,7 @@ export default async function signin () {
     <article>
         <div className="w-full md:w-[30em] rounded-md bg-white p-4">
     <h1>sign into MovieNow</h1>
-    <p>signin Using....</p>
+    <p>signin Using.......</p>
         
          <form action={async()=>{
                  "use server"
